@@ -1,0 +1,9 @@
+version: '4.22'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/html
