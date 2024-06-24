@@ -8,7 +8,7 @@ class Weather {
     } 
 
     public function getWeather($location) {
-        $url = "http://api.weatherapi.com/v1/current.json?key=$this->apiKey&q=$location&aqi=no";
+        $url = "https://api.weatherapi.com/v1/current.json?key=" . urlencode($this->apiKey) . "&q=" . urlencode($location) . "&aqi=no";
         $response = file_get_contents($url);
         return json_decode($response, true);
     }

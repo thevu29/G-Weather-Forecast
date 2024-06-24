@@ -1,20 +1,30 @@
-# backend/Dockerfile
+# Use the official PHP image as the base image
 FROM php:8.0-apache
 
-# Copy source code to /var/www/html
-COPY . /var/www/html
-
-# Set working directory
-WORKDIR /var/www/html
+# Install necessary packages and Composer
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    unzip \
+    && docker-php-ext-install zip
 
 # Install Composer
-RUN apt-get update && \
-    apt-get install -y libzip-dev unzip && \
-    docker-php-ext-install zip && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Set the working directory
+WORKDIR /var/www/html
+
+# Copy project files to the Apache document root
+COPY . /var/www/html/
+
+# Set appropriate permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
 # Install PHP dependencies
 RUN composer install
 
-# Expose port 80 for the web server
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Expose port 80
 EXPOSE 80
