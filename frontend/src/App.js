@@ -9,18 +9,26 @@ const App = () => {
 
     useEffect(() => {
         const localHistory = JSON.parse(localStorage.getItem('history')) || []
-        setHistory(localHistory)
+        const today = new Date().toISOString().split('T')[0]
+
+        if (today !== localHistory.date) {      // remove hitory on new day
+            localStorage.clear()
+        }
+
+        setHistory(localHistory.data)
     }, [])
 
     const handleSaveHistory = (weather) => {
         const localHistory = JSON.parse(localStorage.getItem('history')) || []
-        const isExist = localHistory.find(item =>
+
+        const isExist = localHistory.data.find(item =>
             item?.location?.last_updated === weather?.location?.last_updated && item?.location?.name === weather?.location?.name
         )
+
         if (!isExist) {
-            const newHistory = [weather, ...localHistory]
+            const newHistory = [weather, ...localHistory.data]
             setHistory(newHistory)
-            localStorage.setItem('history', JSON.stringify(newHistory))
+            localStorage.setItem('history', JSON.stringify({ 'date': new Date().toISOString().split('T')[0], 'data': newHistory }))
         }
     }
 
