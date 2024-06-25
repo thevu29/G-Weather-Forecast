@@ -88,4 +88,11 @@ p {
 
 .weather-history-container .weather-item {
   background-color: #0d6efd;
+  max-width: 250px;
+}
+
+.weather-item__name {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
 }

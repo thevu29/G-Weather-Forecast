@@ -13,7 +13,7 @@ const SearchHistory = (props) => {
                         history.map((item, index) => {
                             return (
                                 <div className="weather-item" key={index}>
-                                    <p className="fw-bold">{item?.location?.name} ({item?.location?.localtime})</p>
+                                    <p className="fw-bold weather-item__name">{item?.location?.name} ({item?.location?.localtime})</p>
                                     <div className="d-flex align-items-center mb-2">
                                         <img
                                             src={item?.current?.condition?.icon}
