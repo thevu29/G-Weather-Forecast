@@ -50,22 +50,6 @@ p {
   padding-bottom: 10px;
 }
 
-.hr-text {
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid #ccc;
-  color: #9e8d8d;
-  line-height: 0.1em;
-  margin: 10px 0 20px;
-  font-size: 14px;
-  margin: 24px 0;
-}
-
-.hr-text span {
-  background-color: #e3f2fd;
-  padding: 0 10px;
-}
-
 .weather-container {
   background-color: #0d6efd;
   color: #fff;
@@ -94,7 +78,14 @@ p {
   margin-bottom: 8px;
 }
 
-.weather-item p,
-.weather-item img {
+.weather-item p {
   margin-bottom: 10px;
+}
+
+.weather-history-container {
+  gap: 12px;
+}
+
+.weather-history-container .weather-item {
+  background-color: #0d6efd;
 }

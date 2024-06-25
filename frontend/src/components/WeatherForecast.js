@@ -5,25 +5,32 @@ import Button from 'react-bootstrap/Button'
 import { useEffect, useState } from 'react'
 import { getWeather } from '../services/apiService'
 
-const WeatherForecast = () => {
+const WeatherForecast = (props) => {
     const [location, setLocation] = useState('')
     const [weather, setWeather] = useState(null)
     const [validated, setValidated] = useState(false)
+    const { handleSaveHistory } = props
 
     const fetchWeather = async () => {
         const res = await getWeather(location)
-        res.data.error ? alert(`Error ${res.data.error.code}: ${res.data.error.message}`) : setWeather(res.data)
+        if (res.data.error) {
+            alert(`Error ${res.data.error.code}: ${res.data.error.message}`)
+        } else {
+            setWeather(res.data)
+            return res.data
+        }
     }
 
     useEffect(() => {
         fetchWeather()
     }, [])
 
-    const handleSubmitLocation = (e) => {
+    const handleSubmitLocation = async (e) => {
         e.preventDefault()
         const form = e.currentTarget
         if (form.checkValidity()) {
-            fetchWeather()
+            const weather = await fetchWeather()
+            handleSaveHistory(weather)
         }
         setValidated(true)
     }
@@ -42,12 +49,10 @@ const WeatherForecast = () => {
                             onChange={e => setLocation(e.target.value)}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid city.
+                            Please provide a valid city
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Button variant="primary" className="w-100 btn" type="submit">Search</Button>
-                    <h2 className="hr-text"><span>Or</span></h2>
-                    <Button variant="secondary" className="w-100 btn">Use Current Location</Button>
                 </Form>
             </Col>
             <Col xs={8}>
@@ -78,12 +83,15 @@ const WeatherForecast = () => {
                                 return (
                                     <div className="weather-item" key={index}>
                                         <p className="fw-bold">({item?.date})</p>
-                                        <img
-                                            src={item?.day?.condition?.icon}
-                                            alt=""
-                                            width={50}
-                                            height={50}
-                                        />
+                                        <div className="d-flex align-items-center mb-2">
+                                            <img
+                                                src={item?.day?.condition?.icon}
+                                                alt=""
+                                                width={50}
+                                                height={50}
+                                            />
+                                            <span style={{ fontSize: 14 }}>{item?.day?.condition?.text}</span>
+                                        </div>
                                         <p>Temp: {item?.day?.avgtemp_c}&deg;C</p>
                                         <p>Wind: {item?.day?.maxwind_mph} mph</p>
                                         <p>Humidity: {item?.day?.avghumidity}%</p>
