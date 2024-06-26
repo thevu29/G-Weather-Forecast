@@ -1,20 +1,25 @@
 <?php
-require './vendor/autoload.php';
-require './src/Weather.php';
 
-try {
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-    
-    if (isset($_GET['location'])) {
-        $location = $_GET['location'] !== '' ? $_GET['location'] : 'Ho Chi Minh';
-    } else {
-        $location = 'Ho Chi Minh';
-    }
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 
-    $weatherAPI = new Weather('2d3af1d1640a4237b9374444242406');
-    $weatherData = $weatherAPI->getWeather($location);
-    echo json_encode($weatherData);
-} catch (Exception $e) {
-    echo 'Error: ' . $e->getMessage();
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+switch ($requestUri) {
+    case '/weather':
+        require './src/getWeather.php';
+        break;
+    case '/send-email':
+        require './src/sendEmail.php';
+        break;
+    case '/subscribe':
+        require './src/subscribe.php';
+        break;
+    case '/unsubscribe':
+        require './src/unsubscribe.php';
+        break;
+    default:
+        http_response_code(404);
+        echo '404 Not Found';
+        break;
 }

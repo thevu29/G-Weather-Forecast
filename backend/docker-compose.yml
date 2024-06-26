@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - 8081:80
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - default
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=weather_forecast
+      - MYSQL_USER=weather_forecast
+      - MYSQL_PASSWORD=123
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306

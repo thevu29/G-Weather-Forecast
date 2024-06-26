@@ -15,17 +15,18 @@ const App = () => {
             localStorage.clear()
         }
 
-        setHistory(localHistory.data)
+        setHistory(localHistory?.data)
     }, [])
 
     const handleSaveHistory = (weather) => {
         const localHistory = JSON.parse(localStorage.getItem('history')) || []
 
-        const isExist = localHistory.data.find(item =>
+        const isExist = localHistory.length && localHistory.data.find(item =>
             item?.location?.last_updated === weather?.location?.last_updated && item?.location?.name === weather?.location?.name
         )
 
         if (!isExist) {
+            localHistory.data = localHistory.data || []
             const newHistory = [weather, ...localHistory.data]
             setHistory(newHistory)
             localStorage.setItem('history', JSON.stringify({ 'date': new Date().toISOString().split('T')[0], 'data': newHistory }))

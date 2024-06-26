@@ -1,30 +1,23 @@
-# Use the official PHP image as the base image
 FROM php:8.0-apache
 
-# Install necessary packages and Composer
+WORKDIR /var/www/html
+
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     unzip \
-    && docker-php-ext-install zip
+    && docker-php-ext-install zip pdo pdo_mysql mysqli \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Set the working directory
-WORKDIR /var/www/html
-
-# Copy project files to the Apache document root
-COPY . /var/www/html/
-
-# Set appropriate permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Install PHP dependencies
-RUN composer install
+COPY composer.json composer.lock ./
+RUN composer install --no-scripts --no-autoloader
 
-# Enable Apache mod_rewrite
+COPY . /var/www/html/
+RUN composer dump-autoload --optimize
+
 RUN a2enmod rewrite
 
-# Expose port 80
 EXPOSE 80

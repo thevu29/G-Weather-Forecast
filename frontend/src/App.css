@@ -96,3 +96,8 @@ p {
   display: flex;
   align-items: center;
 }
+
+.btn-subscribe input {
+  width: 4rem !important;
+  height: 2rem;
+}

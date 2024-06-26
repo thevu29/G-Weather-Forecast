@@ -8,16 +8,18 @@ import { getWeather } from '../services/apiService'
 const WeatherForecast = (props) => {
     const [location, setLocation] = useState('')
     const [weather, setWeather] = useState(null)
-    const [validated, setValidated] = useState(false)
+    const [email, setEmail] = useState('')
+    const [cityValidate, setCityValidat] = useState(false)
+    const [emailValidate, setEmailValidate] = useState(false)
     const { handleSaveHistory } = props
 
     const fetchWeather = async () => {
         const res = await getWeather(location)
-        if (res.data.error) {
-            alert(`Error ${res.data.error.code}: ${res.data.error.message}`)
+        if (res.error) {
+            alert(`Error ${res.error.code}: ${res.error.message}`)
         } else {
-            setWeather(res.data)
-            return res.data
+            setWeather(res)
+            return res
         }
     }
 
@@ -32,13 +34,17 @@ const WeatherForecast = (props) => {
             const weather = await fetchWeather()
             handleSaveHistory(weather)
         }
-        setValidated(true)
+        setCityValidat(true)
+    }
+
+    const handleSubmitSubscribe = (e) => {
+        
     }
 
     return (
         <Row>
             <Col>
-                <Form noValidate validated={validated} onSubmit={handleSubmitLocation}>
+                <Form noValidate validated={cityValidate} onSubmit={handleSubmitLocation}>
                     <Form.Group className="mb-3">
                         <Form.Label className="fw-bold">Enter a City Name</Form.Label>
                         <Form.Control
@@ -53,6 +59,31 @@ const WeatherForecast = (props) => {
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Button variant="primary" className="w-100 btn" type="submit">Search</Button>
+                </Form>
+                <Form noValidate validated={emailValidate} className="mt-5">
+                    <h2></h2>
+                    <Form.Group className="mb-3">
+                        <Form.Label className="fw-bold">Register for daily announcement</Form.Label>
+                        <div className="d-flex align-items-center justify-content-between" style={{gap: 10}}>
+                            <div className="flex-1">
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    required
+                                    value={email}
+                                    onChange={e => setEmail(e.target.value)}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a valid email
+                                </Form.Control.Feedback>
+                            </div>
+                            <Form.Check
+                                type="switch"
+                                id="custom-switch"
+                                className="btn-subscribe"
+                            />
+                        </div>
+                    </Form.Group>
                 </Form>
             </Col>
             <Col xs={8}>
