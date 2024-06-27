@@ -6,3 +6,9 @@ define('DB_PORT', getenv('DB_PORT'));
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASSWORD', getenv('DB_PASSWORD'));
+
+$ip = gethostbyname(DB_HOST);
+if ($ip == DB_HOST) {
+    die("Hostname resolution failed for DB_HOST: " . DB_HOST . "\n");
+}
+echo "Resolved IP for DB_HOST: " . $ip . "\n";
