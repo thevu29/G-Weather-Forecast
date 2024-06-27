@@ -1,6 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://g-weather-forecast-d3p0pfxq5-thevu29s-projects.vercel.app/");
 header("Content-Type: application/json; charset=UTF-8");
 
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
