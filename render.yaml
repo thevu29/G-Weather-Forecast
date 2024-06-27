@@ -1,34 +1,18 @@
-databases:
-  - name: weather-forecast-db
-    databaseName: weather_forecast
-    user: weather_forecast
-    password: 123
-    type: mysql
-    plan: standard
-
 services:
-  - name: weather-forecast-backend
-    type: web
-    env: php
-    plan: standard
+  - type: web
+    name: backend
+    env: docker
+    plan: free
     buildCommand: ""
     startCommand: ""
     envVars:
       - key: DB_HOST
-        fromDatabase:
-          name: weather-forecast-db
-          property: host
+        value: db
       - key: DB_NAME
-        fromDatabase:
-          name: weather-forecast-db
-          property: databaseName
+        value: weather_forecast
       - key: DB_USER
-        fromDatabase:
-          name: weather-forecast-db
-          property: user
+        value: weather_forecast
       - key: DB_PASSWORD
-        fromDatabase:
-          name: weather-forecast-db
-          property: password
+        value: 123
       - key: DB_PORT
-        value: "3306"
+        value: 3306
