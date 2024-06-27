@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: weather-forecast-backend
+    env: php
+    plan: standard
+    buildCommand: ""
+    startCommand: ""
+    envVars:
+      - key: DB_HOST
+        value: "db"
+      - key: DB_NAME
+        value: "weather_forecast"
+      - key: DB_USER
+        value: "your-database-user"
+      - key: DB_PASSWORD
+        value: "your-database-password"
+      - key: DB_PORT
+        value: "3306"
+
+databases:
+  - name: weather_forecast_db
+    type: mysql
+    plan: starter
+    properties:
+      databaseName: weather_forecast
+      user: your-database-user
+      password: your-database-password
