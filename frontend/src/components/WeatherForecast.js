@@ -41,6 +41,12 @@ const WeatherForecast = (props) => {
         if (form.checkValidity()) {
             NProgress.start()
             const weather = await fetchWeather()
+
+            if (weather.error) {
+                alert(weather.error)
+                return
+            }
+            
             handleSaveHistory(weather)
             NProgress.done()
         }
