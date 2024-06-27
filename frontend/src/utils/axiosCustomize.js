@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const instance = axios.create({
-    baseURL: 'https://g-weather-forecast-1-xljh.onrender.com/'
+    baseURL: 'https://g-weather-forecast-wqlp.onrender.com/'
 })
 
 instance.interceptors.request.use(function (config) {
