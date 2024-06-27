@@ -37,6 +37,7 @@ This is a simple weather forecast application using PHP for the backend and Reac
     ```sh
     npm start
     ```
+4. If you run locally, comment `baseURL: 'https://g-weather-forecast-wqlp.onrender.com/'`, and uncomment `baseURL: 'http://localhost:8081/'` in `frontend/utils/axiosCustomize.js` 
     
 ### Live Demo
 
