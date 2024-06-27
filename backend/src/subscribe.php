@@ -18,7 +18,7 @@ if (isset($_POST['email']) && isset($_POST['location'])) {
         }
     } catch (PDOException $e) {
         http_response_code(500);
-        echo json_encode(['success' => false, 'message' => 'An error occurred. Please try again later. ' . $e->getMessage()]);
+        echo json_encode(['success' => false, 'message' => 'An error occurred. Please try again later. ', 'error' => $e->getMessage()]);
     }
 } else {
     http_response_code(400);

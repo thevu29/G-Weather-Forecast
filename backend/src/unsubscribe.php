@@ -16,6 +16,6 @@ if (isset($_POST['email'])) {
         }
     } catch (PDOException $e) {
         http_response_code(500);
-        echo json_encode(['success' => false, 'message' => 'An error occurred. Please try again later.']);
+        echo json_encode(['success' => false, 'message' => 'An error occurred. Please try again later.', 'error' => $e->getMessage()]);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-define('WEATHER_API_KEY', '2d3af1d1640a4237b9374444242406');
-define('DB_NAME', 'weather_forecast');
-define('DB_USER', 'weather_forecast');
-define('DB_PASSWORD', '123');
-define('DB_HOST', 'db');
-define('DB_PORT', '3306');
+define('WEATHER_API_KEY', getenv('WEATHER_API_KEY'));
+define('DB_NAME', getenv('DB_NAME'));
+define('DB_USER', getenv('DB_USER'));
+define('DB_PASSWORD', getenv('DB_PASSWORD'));
+define('DB_HOST', getenv('DB_HOST'));
+define('DB_PORT', getenv('DB_PORT'));
