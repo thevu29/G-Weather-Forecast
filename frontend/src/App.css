@@ -75,7 +75,7 @@ p {
 
 .weather-future-container__box {
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -122,24 +122,18 @@ p {
 
 /* Responsive */
 @media (max-width: 739px) {
-  .weather-future-container {
+  .weather-future-container,
+  .weaather-history {
     text-align: center;
   }
 
-  .weather-future-container__box {
+  .weather-future-container__box,
+  .weather-history-container {
     justify-content: center;
   }
 
   .weather-image-container {
     flex-direction: column;
     margin-bottom: 1rem;
-  }
-
-  .weaather-history {
-    text-align: center;
-  }
-
-  .weather-history-container {
-    justify-content: center;
   }
 }

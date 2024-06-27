@@ -1,8 +1,8 @@
 <?php
 require_once 'config.php';
 
-function getWeather($location = 'Ho Chi Minh') {
-    $url = 'https://api.weatherapi.com/v1/forecast.json?key=' . urlencode(WEATHER_API_KEY) . '&q=' . urlencode($location) . '&days=4&aqi=no&alerts=no';
+function getWeather($location = 'Ho Chi Minh', $days = 4) {
+    $url = 'https://api.weatherapi.com/v1/forecast.json?key=' . urlencode(WEATHER_API_KEY) . '&q=' . urlencode($location) . '&days=' . $days . '&aqi=no&alerts=no';
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -31,6 +31,7 @@ function getWeather($location = 'Ho Chi Minh') {
 
 if (isset($_GET['location'])) {
     $location = $_GET['location'] !== '' ? $_GET['location'] : 'Ho Chi Minh';
-    $weatherData = getWeather($location);
+    $days = isset($_GET['days']) ? $_GET['days'] : 4;
+    $weatherData = getWeather($location, $days);
     echo json_encode($weatherData);
 }

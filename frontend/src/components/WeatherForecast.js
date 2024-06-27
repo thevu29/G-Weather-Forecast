@@ -12,23 +12,20 @@ const WeatherForecast = (props) => {
     const [email, setEmail] = useState('')
     const [cityValidate, setCityValidate] = useState(false)
     const [emailValidate, setEmailValidate] = useState(false)
+    const [dayForecast, setDayForecast] = useState(4)
     const { handleSaveHistory } = props
 
     const fetchWeather = async () => {
         NProgress.start()
-        const res = await getWeather(location)
-        if (res.error) {
-            alert(`Error ${res.error.code}: ${res.error.message}`)
-        } else {
-            setWeather(res)
-            return res
-        }
+        const res = await getWeather(location, dayForecast)
+        setWeather(res)
         NProgress.done()
+        return res
     }
 
     useEffect(() => {
         fetchWeather()
-    }, [])
+    }, [dayForecast])
 
     const validateEmail = (email) => {
         return String(email)
@@ -87,6 +84,11 @@ const WeatherForecast = (props) => {
             }
         }
         setEmailValidate(true)
+    }
+
+    const handleLoadMore = async () => {
+        setDayForecast(7)
+        fetchWeather()
     }
 
     const resetForm = () => {
@@ -168,7 +170,7 @@ const WeatherForecast = (props) => {
                     </div>
                 )}
                 <div className="weather-future-container">
-                    <h2>4-Day Forecast</h2>
+                    <h2>{dayForecast}-Day Forecast</h2>
                     <div className="weather-future-container__box">
                         {weather && weather.forecast && weather.forecast.forecastday && weather.forecast.forecastday.length > 0 &&
                             weather.forecast.forecastday.map((item, index) => {
@@ -182,7 +184,7 @@ const WeatherForecast = (props) => {
                                                 width={50}
                                                 height={50}
                                             />
-                                            <span style={{ fontSize: 14 }}>{item?.day?.condition?.text}</span>
+                                            <span style={{ fontSize: 14, maxWidth: 110 }}>{item?.day?.condition?.text}</span>
                                         </div>
                                         <p>Temp: {item?.day?.avgtemp_c}&deg;C</p>
                                         <p>Wind: {item?.day?.maxwind_mph} mph</p>
@@ -192,6 +194,17 @@ const WeatherForecast = (props) => {
                             })
                         }
                     </div>
+                    {dayForecast === 4 && (
+                        <div className="d-flex justify-content-center mt-3">
+                            <Button
+                                variant="primary"
+                                className="btn"
+                                onClick={handleLoadMore}
+                            >
+                                Load More
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </Col>
         </Row>
