@@ -54,7 +54,8 @@ const WeatherForecast = (props) => {
             const subscribeRes = await postSubscribe(email, location)
 
             if (!subscribeRes.success) {
-                alert(subscribeRes.message)
+                console.log(subscribeRes)
+                // alert(subscribeRes.message)
             } else {
                 const sendEmailRes = await postSendEmail(email, location)
 

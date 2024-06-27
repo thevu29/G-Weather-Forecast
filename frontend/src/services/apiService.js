@@ -1,7 +1,6 @@
 import axios from '../utils/axiosCustomize'
 
 const getWeather = (location, days) => {
-    console.log(days)
     return axios.get('weather', {
         params: {
             location: location,
