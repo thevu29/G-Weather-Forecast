@@ -48,7 +48,7 @@ This is a simple weather forecast application using PHP for the backend and Reac
 - Use service from api provider https://www.weatherapi.com (free version)
 
 ### Error
-When run locally, if you get the error: `Fatal error:  Uncaught PDOException: could not find driver in /var/www/html/src/mysqlService.php:39`. Open the interactive terminal with your docker container that's running the `www` service and run the command: 
+When run locally, if you get the error: `Fatal error: Uncaught PDOException: could not find driver in /var/www/html/src/mysqlService.php:39`. Open the interactive terminal with your docker container that's running the `www` service and run the command: 
 ```sh
 docker-php-ext-install pdo pdo_mysql && docker-php-ext-enable pdo pdo_mysql && apachectl restart
 ```
