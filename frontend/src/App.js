@@ -21,7 +21,7 @@ const App = () => {
     const handleSaveHistory = (weather) => {
         const localHistory = JSON.parse(localStorage.getItem('history')) || []
 
-        const isExist = localHistory.length && localHistory.data.find(item =>
+        const isExist = localHistory.data && localHistory.data.find(item =>
             item?.location?.last_updated === weather?.location?.last_updated && item?.location?.name === weather?.location?.name
         )
 

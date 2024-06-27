@@ -6,15 +6,18 @@ const SearchHistory = (props) => {
 
     return (
         <Row className="mt-5">
-            <Col>
+            <Col className="weaather-history">
                 <h2>Today Search History</h2>
-                <div className="d-flex align-items-center weather-history-container flex-wrap">
+                <div className="weather-history-container">
                     {history && history.length > 0 &&
                         history.map((item, index) => {
                             return (
                                 <div className="weather-item" key={index}>
-                                    <p className="fw-bold weather-item__name">{item?.location?.name} ({item?.location?.localtime})</p>
-                                    <div className="d-flex align-items-center mb-2">
+                                    <span className="fw-bold weather-item__name">
+                                        <p>{item?.location?.name}</p>
+                                        <p>({item?.location?.localtime})</p>
+                                    </span>
+                                    <div className="weather-image-container">
                                         <img
                                             src={item?.current?.condition?.icon}
                                             alt=""

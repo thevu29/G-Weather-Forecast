@@ -7,7 +7,7 @@ require_once 'getWeather.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function sendEmail($email, $forecast) {
+function sendEmail($email, $weatherData) {
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
@@ -23,11 +23,11 @@ function sendEmail($email, $forecast) {
     
         $mail->isHTML(true);
         $mail->Subject = 'Daily Weather Forecast';
-        $content = "<h1>Weather Forecast for {$forecast['location']['name']} ({$forecast['location']['localtime']})</h1>";
-        $content .= "<p>Temperature: {$forecast['current']['temp_c']}°C</p>";
-        $content .= "<p>Condition: {$forecast['current']['condition']['text']}</p>";
-        $content .= "<p>Humidity: {$forecast['current']['humidity']}%</p>";
-        $content .= "<p>Wind Speed: {$forecast['current']['wind_mph']} mph</p>";
+        $content = "<h1>Weather Forecast for {$weatherData['location']['name']} ({$weatherData['location']['localtime']})</h1>";
+        $content .= "<p>Temperature: {$weatherData['current']['temp_c']}°C</p>";
+        $content .= "<p>Condition: {$weatherData['current']['condition']['text']}</p>";
+        $content .= "<p>Humidity: {$weatherData['current']['humidity']}%</p>";
+        $content .= "<p>Wind Speed: {$weatherData['current']['wind_mph']} mph</p>";
         $mail->Body = $content;
     
         return $mail->send();
@@ -37,22 +37,20 @@ function sendEmail($email, $forecast) {
     }
 }
 
-function sendDailyWeather() {
-    $mysql = new MysqlService(DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT);
-    $pdo = $mysql->connect();
-    $stmt = $pdo->query('SELECT * FROM Subscriber');
-    
-    $subscribers = $stmt->fetchAll();
-    $weatherData = getWeather();
-    
-    foreach ($subscribers as $subscriber) {
-        sendEmail($subscriber['email'], $weatherData);
-    }
-}
-
-if (isset($_POST['email'])) {
+if (isset($_POST['email']) && isset($_POST['location'])) {
     $email = $_POST['email'];
-    $weatherData = getWeather();
+    $location = $_POST['location'];
+
+    $weatherData = getWeather($location);
+    if ($weatherData === false) {
+        echo json_encode(['success' => false, 'message' => 'Failed to retrieve weather data']);
+        exit;
+    }
+
     $result = sendEmail($email, $weatherData);
-    echo json_encode(['success' => $result]);
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Email sent successfully']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to send email']);
+    }
 }

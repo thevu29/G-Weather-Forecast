@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Jun 26, 2024 at 05:52 AM
+-- Generation Time: Jun 26, 2024 at 12:51 PM
 -- Server version: 8.4.0
 -- PHP Version: 8.2.8
 
@@ -28,15 +28,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Subscriber` (
-  `email` varchar(150) NOT NULL
+  `email` varchar(150) NOT NULL,
+  `location` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `Subscriber`
 --
 
-INSERT INTO `Subscriber` (`email`) VALUES
-('thevu1073@gmail.com');
+INSERT INTO `Subscriber` (`email`, `location`) VALUES
+('thevu1073@gmail.com', 'Ho Chi Minh');
 
 --
 -- Indexes for dumped tables
