@@ -9,6 +9,12 @@ services:
       - ./:/var/www/html
     networks:
       - default
+    environment:
+      - DB_HOST=db
+      - DB_NAME=weather_forecast
+      - DB_USER=weather_forecast
+      - DB_PASSWORD=123
+      - DB_PORT=3306
   db:
     image: mysql:latest
     environment:
