@@ -5,7 +5,7 @@ require_once 'mysqlService.php';
 if (isset($_POST['email']) && isset($_POST['location'])) {
     $email = $_POST['email'];
     $location = $_POST['location'];
-
+    echo DB_NAME . ' ' . DB_USER . ' ' . DB_PASSWORD . ' ' . DB_HOST . ' ' . DB_PORT;
     try {
         $mysql = new MysqlService(DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT);
         $isExist = $mysql->executeQuery("SELECT COUNT(*) FROM Subscriber WHERE email = '$email'")->fetchColumn();
