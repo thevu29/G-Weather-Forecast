@@ -18,7 +18,11 @@ const WeatherForecast = (props) => {
     const fetchWeather = async () => {
         NProgress.start()
         const res = await getWeather(location, dayForecast)
-        setWeather(res)
+        if (res.error) {
+            alert(res.error.message)
+        } else {
+            setWeather(res)
+        }
         NProgress.done()
         return res
     }
@@ -41,13 +45,9 @@ const WeatherForecast = (props) => {
         if (form.checkValidity()) {
             NProgress.start()
             const weather = await fetchWeather()
-
-            if (weather.error) {
-                alert(weather.error.message)
-            } else {
+            if (!weather.error) {
                 handleSaveHistory(weather)
             }
-
             NProgress.done()
         }
         setCityValidate(true)
