@@ -1,18 +1,24 @@
 services:
-  - type: web
-    name: backend
-    env: docker
-    plan: free
-    buildCommand: ""
-    startCommand: ""
-    envVars:
-      - key: DB_HOST
-        value: db
-      - key: DB_NAME
-        value: weather_forecast
-      - key: DB_USER
-        value: weather_forecast
-      - key: DB_PASSWORD
-        value: 123
-      - key: DB_PORT
-        value: 3306
+- type: web
+  name: G-Weather-Forecast
+  runtime: docker
+  repo: https://github.com/thevu29/G-Weather-Forecast
+  plan: free
+  envVars:
+  - key: DB_PASSWORD
+    value: 123
+  - key: DB_USER
+    value: weather_forecast
+  - key: DB_NAME
+    value: weather_forecast
+  - key: DB_PORT
+    value: 3306
+  - key: DB_HOST
+    value: db
+  - key: WEATHER_API_KEY
+    value: 2d3af1d1640a4237b9374444242406
+  region: singapore
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: backend
+version: "1"
