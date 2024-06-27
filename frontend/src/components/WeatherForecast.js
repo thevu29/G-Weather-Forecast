@@ -43,11 +43,11 @@ const WeatherForecast = (props) => {
             const weather = await fetchWeather()
 
             if (weather.error) {
-                alert(weather.error)
-                return
+                alert(weather.error.message)
+            } else {
+                handleSaveHistory(weather)
             }
-            
-            handleSaveHistory(weather)
+
             NProgress.done()
         }
         setCityValidate(true)
