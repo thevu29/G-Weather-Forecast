@@ -8,7 +8,6 @@ RUN apt-get update \
         libzip-dev \
         libpq-dev \
         unzip \
-        postgresql-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
