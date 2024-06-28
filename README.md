@@ -1,8 +1,8 @@
 # Weather Forecast
 
-This is a simple weather forecast application using PHP for the backend and ReactJS for the frontend.
+This is a simple weather forecast application using PHP for the backend and ReactJS for the frontend. Deploy `backend`, `postgresql` on [Render](https://render.com/) and `fronted` on [Vercel](https://vercel.com/)
 
-## Setup Instructions
+## Setup Instructions for Running Locally
 
 ### Backend (PHP)
 
@@ -18,7 +18,7 @@ This is a simple weather forecast application using PHP for the backend and Reac
 
 3. Build and run the Docker containers:
     ```sh
-    docker-compose up
+    docker-compose up --build
     ```
 
 ### Frontend (ReactJS)
@@ -46,10 +46,3 @@ This is a simple weather forecast application using PHP for the backend and Reac
 ### API Documentation
 
 - Use service from api provider https://www.weatherapi.com (free version)
-
-### Error
-When run locally, if you get the error: `Fatal error: Uncaught PDOException: could not find driver in /var/www/html/src/mysqlService.php:39`. Open the interactive terminal with your docker container that's running the `www` service and run the command: 
-```sh
-docker-php-ext-install pdo pdo_mysql && docker-php-ext-enable pdo pdo_mysql && apachectl restart
-```
-
