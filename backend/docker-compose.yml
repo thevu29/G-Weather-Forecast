@@ -10,7 +10,7 @@ services:
     networks:
       - app-network
     environment:
-      - DB_HOST=weather_forecast.dpg-cpv30btumphs73c4o7e0-a.singapore-postgres.render.com
+      - DB_HOST=dpg-cpv30btumphs73c4o7e0-a
       - DB_DATABASE_NAME=weather_forecast_x522
       - DB_USERNAME=weather_forecast
       - DB_PORT=5432
