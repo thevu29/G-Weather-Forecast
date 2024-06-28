@@ -10,38 +10,13 @@ services:
     networks:
       - app-network
     environment:
-      - DB_HOST=db
-      - DB_NAME=weather_forecast
-      - DB_USER=weather_forecast
-      - DB_PASSWORD=123
-      - DB_PORT=3306
-
-  db:
-    image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: weather_forecast
-      MYSQL_USER: weather_forecast
-      MYSQL_PASSWORD: 123
-    volumes:
-      - db-data:/var/lib/mysql
-      - ./db:/docker-entrypoint-initdb.d
-    networks:
-      - app-network
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8001:80"
-    environment:
-      - PMA_HOST=db
-      - PMA_PORT=3306
-    networks:
-      - app-network
+      - DB_HOST=postgresql://weather_forecast:WwHJtD4Cy1Ipj8RBCGy0ST1DSqZUdzgn@dpg-cpv30btumphs73c4o7e0-a.singapore-postgres.render.com/weather_forecast_x522
+      - DB_DATABASE_NAME=weather_forecast_x522
+      - DB_USERNAME=weather_forecast
+      - DB_PORT=5432
+      - DB_PASSWORD=WwHJtD4Cy1Ipj8RBCGy0ST1DSqZUdzgn
+      - DB_DIALECT=postgres
 
 networks:
   app-network:
     driver: bridge
-
-volumes:
-  db-data:
