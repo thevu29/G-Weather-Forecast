@@ -100,8 +100,6 @@ const WeatherForecast = (props) => {
     const resetForm = () => {
         setLocation('')
         setEmail('')
-        setCityValidate(true)
-        setEmailValidate(true)
     }
 
     return (
