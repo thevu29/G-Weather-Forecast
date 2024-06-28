@@ -8,6 +8,7 @@ RUN apt-get update \
         libzip-dev \
         libpq-dev \
         unzip \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
