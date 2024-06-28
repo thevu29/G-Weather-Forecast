@@ -45,4 +45,5 @@ This is a simple weather forecast application using PHP for the backend and Reac
 
 ### API Documentation
 
-- Use service from api provider https://www.weatherapi.com (free version)
+- Getting weather from api provider https://www.weatherapi.com (free version)
+- Verifying email existence from api provider https://hunter.io/
