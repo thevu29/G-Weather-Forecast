@@ -68,7 +68,6 @@ const WeatherForecast = (props) => {
                     alert(sendEmailRes.message)
                 } else {
                     alert(`Subscribe successfully! We just sent you an email about today's weather forecast.\nIn the following days you will receive daily weather forecasts.\nIf you do not receive the email, please check your spam box or inform us!`)
-                    resetForm()
                 }
             }
         }
@@ -86,7 +85,6 @@ const WeatherForecast = (props) => {
                 alert(unsubscribeRes.message)
             } else {
                 alert(`Unsubscribe successfully! You will no longer receive daily weather forecasts from us.\nIf you want to subscribe again, please enter your email and click the Subscribe button!`)
-                resetForm()
             }
         }
         setEmailValidate(true)
@@ -95,11 +93,6 @@ const WeatherForecast = (props) => {
     const handleLoadMore = async () => {
         setDayForecast(7)
         fetchWeather()
-    }
-
-    const resetForm = () => {
-        setLocation('')
-        setEmail('')
     }
 
     return (
