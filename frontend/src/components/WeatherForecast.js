@@ -39,6 +39,12 @@ const WeatherForecast = (props) => {
             )
     }
 
+    const validateEmailExist = async (email) => {
+        const response = await fetch(`https://api.hunter.io/v2/email-verifier?email=${email}&api_key=8cc4b67acd089c88935f158c304958f423ef4f20`)
+        const data = await response.json();
+        return data.data.status === "valid";
+    }
+
     const handleSearchLocation = async (e) => {
         e.preventDefault()
         const form = e.currentTarget
@@ -56,10 +62,10 @@ const WeatherForecast = (props) => {
     const handleSubscribe = async (e) => {
         const form = e.currentTarget
 
-        const validateEmailExist = await fetch(`https://api.hunter.io/v2/email-verifier?email=${email}&api_key=8cc4b67acd089c88935f158c304958f423ef4f20`)
-
         if (form.checkValidity() && validateEmail(email) && location) {
-            if (validateEmailExist.data.status === 'invalid') {
+            const isEmailExist = await validateEmailExist(email)
+
+            if (!isEmailExist) {
                 alert('Invalid email address! Please enter a valid email address!')
                 return
             }
