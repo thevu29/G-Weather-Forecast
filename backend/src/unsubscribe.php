@@ -5,7 +5,7 @@ require_once 'mysqlService.php';
 if (isset($_POST['email'])) {
     $email = $_POST['email'];
     try {
-        $mysql = new MysqlService(DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT);
+        $mysql = new MysqlService(DB_DATABASE_NAME, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT);
         $isExist = $mysql->executeQuery("SELECT COUNT(*) FROM Subscriber WHERE email = '$email'")->fetchColumn();
         
         if ($isExist <= 0) {
