@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpq-dev \
     unzip \
-    && docker-php-ext-install zip pdo pdo_pgsql \
+    postgresql-dev \
+    && docker-php-ext-install pdo pdo_pgsql \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && rm -rf /var/lib/apt/lists/*
 
