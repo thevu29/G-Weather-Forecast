@@ -16,15 +16,9 @@ class MysqlService {
     }
 
     public function connect() {
-        $dsn = "mysql:host={$this->dbHost};port={$this->dbPort};dbname={$this->dbName}";
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
-        ];
-
         try {
-            return new PDO($dsn, $this->dbUser, $this->dbPassword, $options);
+            $dsn = "pgsql:host=$this->dbHost;port=$this->dbPort;dbname=$this->dbName;user=$this->dbUser;password=$this->dbPassword";
+            return new PDO($dsn);
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
