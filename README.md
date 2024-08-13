@@ -39,10 +39,6 @@ This is a simple weather forecast application using PHP for the backend and Reac
     ```
 4. If you run locally, comment `baseURL: 'https://g-weather-forecast-wqlp.onrender.com/'`, and uncomment `baseURL: 'http://localhost:8081/'` in `frontend/utils/axiosCustomize.js` 
     
-### Live Demo
-
-- [Weather Forecast](https://g-weather-forecast-red.vercel.app/)
-
 ### API Documentation
 
 - Getting weather from api provider https://www.weatherapi.com (free version)
