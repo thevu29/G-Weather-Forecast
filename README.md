@@ -1,7 +1,5 @@
 # Weather Forecast
 
-This is a simple weather forecast application using PHP for the backend and ReactJS for the frontend. Deploy `backend`, `postgresql` on [Render](https://render.com/) and `fronted` on [Vercel](https://vercel.com/)
-
 ## Setup Instructions for Running Locally
 
 ### Backend (PHP)
